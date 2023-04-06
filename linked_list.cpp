@@ -9,59 +9,67 @@ class Node{
 
 class linkedList{
     public:
-        Node *head;
-        Node *tail;
-    linkedList(){
-     head=NULL;
-     tail=NULL;
-    };
-        // linkedList(int value) {
-        //     Node *newNode = new Node;
-        //     newNode -> data = value;
-        //     newNode -> next = NULL;
-        //     head = newNode;
-        //     tail = newNode;
-        // }
+        Node *head, *tail;
+        linkedList(){
+            head = NULL;
+            tail = NULL;
+        }
+
+        void insertNodeAtFront(int value){
+            Node *newNode = new Node;
+            newNode -> data = value;
+            newNode -> next = NULL;
+            if(head==NULL){
+                head = newNode;
+                tail = newNode;
+            } else {
+                newNode -> next = head;
+                head = newNode;
+
+            }
+        }
+
+        void insertNodeAtEnd(int value){
+            Node *newNode = new Node;
+            newNode -> data = value;
+            newNode -> next = NULL;
+            if(head==NULL){
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail -> next = newNode;
+                tail = tail -> next;
+            }
+        }
+
+        void insertAtPosition(int pos, int value){
+            Node *prev = new Node;
+            Node *current = new Node;
+            Node *newNode = new Node;
+            newNode -> data = value;
+            newNode -> next = NULL;
+            if(pos<1){
+                cout<<"\nPosition cant be less than 1.";
+            } else if (pos == 1) {
+                newNode -> next = head;
+                head = newNode;
+            } else {
+                for(int i = 1; i<=pos; i++){
+                    prev = current;
+                    current = current->next;
+                    if(current==NULL){
+                        cout<<"\nInvalid Position";
+                    }
+                    prev->next = newNode;
+                    newNode -> next = current;
+                }
+
+            }
+        }
 };
-
-void insertNodeAtFront(linkedList &lst, int value) {
-    Node *newNode = new Node;
-    newNode -> data = value;
-    newNode -> next = NULL;
-    if(lst.head = NULL){
-        lst.head = newNode;
-        lst.tail = newNode;
-    }
-    else {
-        newNode -> next = lst.head;
-        lst.head = newNode;
-    
-    }
-};
-
-void insertNodeAtEnd(linkedList &lst, int value){
-    Node *newNode = new Node;
-    newNode -> data = value;
-    newNode->next = NULL;
-    if(lst.head==NULL){
-        lst.head=newNode;
-        lst.tail=newNode;
-    } else {
-        lst.tail -> next = newNode;
-        lst.tail = lst.tail -> next;
-        return;
-    }
-
-
-}
 
 int main(){
     linkedList lst;
-    insertNodeAtFront(lst, 40);
-    insertNodeAtFront(lst, 30);
-    insertNodeAtFront(lst, 50);
-    insertNodeAtFront(lst, 60);
-    insertNodeAtFront(lst, 20);
-    return 0;
-    
+    lst.insertNodeAtFront(20);
+    lst.insertNodeAtFront(40);
 }
